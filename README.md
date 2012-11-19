@@ -6,7 +6,7 @@ CRUD actions collection for Yii controllers
 Readme
 ------------
 
-[README RUS](http://www.elisdn.ru/blog/24)
+[README RUS](http://www.elisdn.ru/blog/24/vinosim-deistviia-kontrollerov-v-klassi)
 
 Installation
 ------------
