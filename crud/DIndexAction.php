@@ -25,7 +25,7 @@ class DIndexAction extends DCrudAction
 
         $provider = $this->providerClass;
 
-        $dataProvider=new $provider($model);
+        $dataProvider = new $provider($model);
 
         if ($this->ajaxView && Yii::app()->request->isAjaxRequest) {
             $this->controller->renderPartial($this->ajaxView, array(
