@@ -1,4 +1,4 @@
-Toggle Icon Column for CGridView
+CRUD actions
 ==========================
 
 CRUD actions collection for Yii controllers
