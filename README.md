@@ -11,14 +11,33 @@ Readme
 Installation
 ------------
 
-Extract to `protected/components`.
+Extract to `protected/modules`:
+
+~~~
+protected/
+    modules/
+        crud/
+            components/
+            messages/
+            CrudModule.php
+~~~
+
+Add this record into `modules` section of `protected/config/main.php`:
+
+~~~
+[php]
+'modules'=>array(
+    // ...
+    'crud',
+)),
+~~~
 
 Usage example
 -------------
 
 ~~~
 [php]
-Yii::import('application.components.crud.*');
+Yii::import('crud.components.*');
 
 class PostController extends Controller
 {
@@ -109,7 +128,7 @@ Access checking in callback:
 
 ~~~
 [php]
-Yii::import('application.components.crud.*');
+Yii::import('crud.components.*');
 
 class PostController extends Controller
 {
@@ -147,6 +166,8 @@ Configure sample:
 
 ~~~
 [php]
+Yii::import('crud.components.*');
+
 class PostAdminController extends Controller
 {
     public function actions()
@@ -185,6 +206,25 @@ Actions Create, Toggle and Update redirects to actionView on success instead of 
 
 ~~~
 [php]
+class Controller extends CController 
+{
+    public function reflash()
+    {
+        foreach (array('success', 'error', 'notice') as $type){
+            if(Yii::app()->user->hasFlash($type))
+                Yii::app()->user->setFlash($type, Yii::app()->user->getFlash($type));
+        }
+    }
+}
+~~~
+
+view.php:
+
+~~~
+[php]
+<?php
+<!-- Forward flash messages -->
+<?php $this->reflash() ?>
 <!-- Redirect to frontend view page -->
 <?php $this->redirect($model->getUrl()); ?> 
 ~~~
@@ -193,6 +233,8 @@ or
 
 ~~~
 [php]
+<!-- Forward flash messages -->
+<?php $this->reflash() ?>
 <!-- Come back to form -->
 <?php $this->redirect('update', array('id'=>$model->id)); ?> 
 ~~~
