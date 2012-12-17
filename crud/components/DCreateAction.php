@@ -28,7 +28,8 @@ class DCreateAction extends DCrudAction
             $this->clientCallback('beforeCreate', $model);
             $this->clientCallback('performAjaxValidation', $model);
 
-            if($model->save()){
+            if($model->save())
+            {
                 $this->success($this->success);
                 $this->redirectToView($model);
             }

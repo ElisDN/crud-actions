@@ -42,12 +42,12 @@ class DToggleAction extends DCrudAction
     protected function getAttribute()
     {
         if (empty($this->attributes))
-            throw new CHttpException(400, 'Не указаны атрибуты для переключения');
+            throw new CHttpException(400, Yii::t('CrudModule.crud', 'DToggleAction::attributes is empty'));
 
         $attribute = Yii::app()->request->getParam('attribute');
 
         if (!in_array($attribute, $this->attributes))
-            throw new CHttpException(400, 'Некорректный атрибут');
+            throw new CHttpException(400, Yii::t('CrudModule.crud', 'Missing attribute {attribute}', array('{attribute}'=>$attribute)));
 
         return $attribute;
     }

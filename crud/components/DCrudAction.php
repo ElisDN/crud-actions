@@ -4,21 +4,23 @@
  * @link http://www.elisdn.ru
  */
 
+Yii::import('crud.CrudModule');
+
 class DCrudAction extends CAction
 {
     /*
      * @var string $flash key for Yii::app()->user->setFlash($flashSuccess, $message);
      */
-    public $flashSuccess = 'message';
+    public $flashSuccess = 'success';
     /*
      * @var string $flash key for Yii::app()->user->setFlash($flashError, $message);
      */
-    public $flashError = 'message';
+    public $flashError = 'error';
 
     protected function checkIsPostRequest()
     {
         if (!Yii::app()->request->isPostRequest)
-            throw new CHttpException (400, 'Bad request');
+            throw new CHttpException (400, Yii::t('yii', 'Your request is invalid.'));
     }
 
     protected function clientCallback($method, $model)
@@ -30,13 +32,13 @@ class DCrudAction extends CAction
     protected function success($message)
     {
         if (!Yii::app()->request->isAjaxRequest)
-            Yii::app()->user->setFlash($this->flashSuccess, $message);
+            Yii::app()->user->setFlash($this->flashSuccess, Yii::t('CrudModule.crud', $message));
     }
 
     protected function error($message)
     {
         if (!Yii::app()->request->isAjaxRequest)
-            Yii::app()->user->setFlash($this->flashError, $message);
+            Yii::app()->user->setFlash($this->flashError, Yii::t('CrudModule.crud', $message));
         else
             throw new CHttpException(400, $message);
     }
