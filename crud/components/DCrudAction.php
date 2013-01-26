@@ -45,7 +45,8 @@ class DCrudAction extends CAction
 
     protected function redirectToView($model)
     {
-        $this->controller->redirect(array('view', 'id' => $model->getPrimaryKey()));
+        if (!Yii::app()->request->isAjaxRequest)
+            $this->controller->redirect(array('view', 'id' => $model->getPrimaryKey()));
     }
 
     protected function redirectToReferrer()
